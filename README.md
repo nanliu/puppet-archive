@@ -39,6 +39,12 @@ This module uses types and providers to download and manage compress files, with
 
 The module requires faraday/faraday_middleware gems on the puppet master, which are typically present because they are a dependency of r10k. This dependency is managed by specifying 'include ::archive'.
 
+**NOTE**:  This module also does not currently include 
+installation of archival software.  As an example, if you 
+are 'unzipping' a file on Linux, you'll want to ensure 
+that you have installed the proper `unzip` package for
+your distribution.
+
 ## Usage
 
 ```puppet
