@@ -6,13 +6,21 @@ module PuppetX
       def self.download(url, filepath, options = {})
         uri = URI(url)
         @connection = PuppetX::Bodeco.const_get(uri.scheme.upcase).new("#{uri.scheme}://#{uri.host}:#{uri.port}", options)
-        @connection.download("#{uri.path}?#{uri.query}", filepath)
+        if uri.query.nil? or uri.query.empty?
+          @connection.download("#{uri.path}", filepath)
+        else
+          @connection.download("#{uri.path}?#{uri.query}", filepath)
+        end
       end
 
       def self.content(url, filepath, options = {})
         uri = URI(url)
         @connection = PuppetX::Bodeco.const_get(uri.scheme.upcase).new("#{uri.scheme}://#{uri.host}:#{uri.port}", options)
-        @connection.content("#{uri.path}?#{uri.query}")
+        if uri.query.nil? or uri.query.empty?
+          @connection.content("#{uri.path}")
+        else
+          @connection.content("#{uri.path}?#{uri.query}")
+        end
       end
     end
 
