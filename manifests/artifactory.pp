@@ -1,5 +1,5 @@
 # download from artifactory
-define archive::artifactory (
+define puppetarchive::artifactory (
   $server,
   $port,
   $url_path,
@@ -15,7 +15,7 @@ define archive::artifactory (
   $cleanup      = undef,
 ) {
 
-  include archive::params
+  include puppetarchive::params
 
   if $archive_path {
     $file_path = "${archive_path}/${name}"
@@ -29,7 +29,7 @@ define archive::artifactory (
   $file_url = "${art_url}/${url_path}"
   $sha1_url = "${art_url}/api/storage/${url_path}"
 
-  archive { $file_path:
+  puppetarchive { $file_path:
     ensure        => $ensure,
     path          => $file_path,
     extract       => $extract,
@@ -41,9 +41,9 @@ define archive::artifactory (
     cleanup       => $cleanup,
   }
 
-  $file_owner = pick($owner, $archive::params::owner)
-  $file_group = pick($group, $archive::params::group)
-  $file_mode  = pick($mode, $archive::params::mode)
+  $file_owner = pick($owner, $puppetarchive::params::owner)
+  $file_group = pick($group, $puppetarchive::params::group)
+  $file_mode  = pick($mode, $puppetarchive::params::mode)
 
   file { $file_path:
     owner   => $file_owner,

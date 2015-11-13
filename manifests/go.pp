@@ -1,5 +1,5 @@
 # download from go
-define archive::go (
+define puppetarchive::go (
   $server,
   $port,
   $url_path,
@@ -18,7 +18,7 @@ define archive::go (
   $cleanup      = undef,
 ) {
 
-  include archive::params
+  include puppetarchive::params
 
   if $archive_path {
     $file_path = "${archive_path}/${name}"
@@ -32,7 +32,7 @@ define archive::go (
   $file_url = "${go_url}/${url_path}"
   $md5_url = "${go_url}/${md5_url_path}"
 
-  archive { $file_path:
+  puppetarchive { $file_path:
     ensure        => $ensure,
     path          => $file_path,
     extract       => $extract,
@@ -46,9 +46,9 @@ define archive::go (
     password      => $password,
   }
 
-  $file_owner = pick($owner, $archive::params::owner)
-  $file_group = pick($group, $archive::params::group)
-  $file_mode  = pick($mode, $archive::params::mode)
+  $file_owner = pick($owner, $puppetarchive::params::owner)
+  $file_group = pick($group, $puppetarchive::params::group)
+  $file_mode  = pick($mode, $puppetarchive::params::mode)
 
   file { $file_path:
     owner   => $file_owner,

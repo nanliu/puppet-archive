@@ -1,5 +1,5 @@
-# archive parameters
-class archive::params {
+# puppetarchive parameters
+class puppetarchive::params {
   case $::osfamily {
     default: {
       $path  = '/opt/staging'
