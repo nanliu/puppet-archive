@@ -1,4 +1,4 @@
-# == Class: archive
+# == Class: puppetarchive
 #
 # Manages archive modules dependencies.
 #
@@ -10,19 +10,19 @@
 #   seven_zip_provider => 'windows',
 # }
 #
-class archive (
-  $seven_zip_name     = $archive::params::seven_zip_name,
-  $seven_zip_provider = $archive::params::seven_zip_provider,
+class puppetarchive (
+  $seven_zip_name     = $puppetarchive::params::seven_zip_name,
+  $seven_zip_provider = $puppetarchive::params::seven_zip_provider,
   $seven_zip_source   = undef,
-) inherits archive::params {
+) inherits puppetarchive::params {
   package { 'faraday':
     ensure   => present,
-    provider => $archive::params::gem_provider,
+    provider => $puppetarchive::params::gem_provider,
   }
 
   package { 'faraday_middleware':
     ensure   => present,
-    provider => $archive::params::gem_provider,
+    provider => $puppetarchive::params::gem_provider,
   }
 
   if $::osfamily == 'Windows' and !($seven_zip_provider in ['', undef]) {
