@@ -17,9 +17,16 @@ class archive::params {
     }
   }
 
-  if $::puppetversion =~ /Puppet Enterprise/ and $::osfamily != 'Windows' {
-    $gem_provider = 'pe_gem'
-  } else {
-    $gem_provider = 'gem'
+# from https://tickets.puppetlabs.com/browse/MODULES-2279
+  if $aio_agent_version {
+      # the master version is irrelevant here, all AIO agents will use this
+      $gem_provider = 'puppet_gem'
   }
+  elsif str2bool($is_pe) and $::osfamily != 'Windows' {
+      $gem_provider = 'pe_gem'
+  }
+  else {
+      $gem_provider = 'gem'
+  }
+
 }
