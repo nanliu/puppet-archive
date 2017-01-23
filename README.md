@@ -94,6 +94,12 @@ if $::facts['osfamily'] != 'windows' {
 }
 ```
 
+**NOTE**:  This module also does not currently include 
+installation of archival software.  As an example, if you 
+are 'unzipping' a file on Linux, you'll want to ensure 
+that you have installed the proper `unzip` package for
+your distribution.
+
 ## Usage
 
 Archive module dependency is managed by the archive class. This is only
